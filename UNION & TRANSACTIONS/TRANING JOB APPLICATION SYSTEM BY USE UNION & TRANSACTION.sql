@@ -125,3 +125,48 @@ WHERE Email IN (SELECT Email FROM Trainees);
 
 -- Preview the update:
 SELECT * FROM Applicants;
+
+-- ====(Batch Script & Transactions)====
+
+-- 4. Research: 
+
+-- What is a SQL transaction? 
+
+-- How to write transaction blocks in your database tool (BEGIN TRANSACTION, COMMIT, ROLLBACK)? 
+BEGIN TRANSACTION;
+
+-- SQL Code (eg:- select, where, from)
+
+COMMIT; -- Save changes permanently
+
+-- Or Undo all changes if an error occurs
+ROLLBACK;
+
+
+-- 5. Task: 
+
+BEGIN TRY
+BEGIN TRANSACTION;
+INSERT INTO Applicants VALUES 
+(104, 'Zahra Al Amri', 'zahra.a@example.com', 'Referral', '2025-05-10');
+-- Intentional error: duplicate ApplicantID
+INSERT INTO Applicants VALUES
+(104, 'Error User', 'error@example.com', 'Website', '2025-05-11');
+COMMIT; -- This line won't be reached if error occurs
+END TRY
+BEGIN CATCH
+ROLLBACK; -- Undo all inserts
+Select ERROR_LINE(), ERROR_MESSAGE(), ERROR_NUMBER();
+END CATCH;
+
+
+-- 6. Add this logic: 
+BEGIN TRANSACTION; 
+INSERT INTO Applicants VALUES 
+(104, 'Zahra Al Amri', 'zahra.a@example.com', 'Referral', '2025-05-10'); 
+INSERT INTO Applicants 
+VALUES (104, 'Error User', 'error@example.com', 'Website', '2025-05-11'); -- Duplicate ID 
+COMMIT; 
+ --ROLLBACK;
+
+ SELECT * FROM Applicants;
