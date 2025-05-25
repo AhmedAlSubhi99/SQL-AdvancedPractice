@@ -53,3 +53,30 @@ SELECT FullName, Email FROM Applicants;
 --FROM Trainees t
 --INNER JOIN Applicants a ON t.Email = a.Email;
 
+-- (2) DROP, DELETE, TRUNCATE Observation 
+
+-- 4. Try DELETE FROM Trainees WHERE Program = 'Outsystems'. 
+DELETE FROM Trainees
+WHERE Program = 'Outsystems';
+
+Select * FROM Trainees;
+
+-- 5. Try TRUNCATE TABLE Applicants. 
+TRUNCATE TABLE Applicants;
+
+Select * FROM Applicants;
+
+-- 6. Try DROP TABLE Applicants. 
+DROP TABLE Applicants;
+
+Select * FROM Applicants; -- It show error is Msg 208, Level 16, State 1, Line 72 Invalid object name 'Applicants'. due to we are dropped the Applicants.
+
+-- 7. observations after each command.
+-- DELETE FROM Trainees WHERE Program = 'Outsystems'
+-- Only matching rows are deleted. Table structure remains. Can be rolled back.
+
+-- TRUNCATE TABLE Applicants
+-- All rows are deleted. Table structure remains. Cannot be rolled back.
+
+-- DROP TABLE Applicants
+-- Table is completely removed. Cannot select from it afterward. Cannot be rolled back.
