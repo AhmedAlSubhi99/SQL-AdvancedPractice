@@ -170,3 +170,25 @@ COMMIT;
  --ROLLBACK;
 
  SELECT * FROM Applicants;
+
+-- ====(ACID Properties Exploration)==== 
+
+-- 7. Research and summarize each of the ACID properties: 
+
+-- Atomicity: All steps in a transaction succeed or none do.
+
+-- Consistency: Keep data valid before and after transaction.
+
+-- Isolation: Transactions run independently without affect each other.
+
+-- Durability: Once committed, changes are permanent even after crash.
+
+-- 8. For each property, write a real-life example that explains it in your own words. 
+
+-- Atomicity: ATM must deduct money and give cash — not just one.
+
+-- Consistency: Online store won’t let you order an out-of-stock item.
+
+-- Isolation: Only one person can book the last movie ticket.
+
+-- Durability: Bank transfer stays saved even if app crash.
