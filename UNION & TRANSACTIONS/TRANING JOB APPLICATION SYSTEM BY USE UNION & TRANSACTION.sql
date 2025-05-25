@@ -80,3 +80,48 @@ Select * FROM Applicants; -- It show error is Msg 208, Level 16, State 1, Line 7
 
 -- DROP TABLE Applicants
 -- Table is completely removed. Cannot select from it afterward. Cannot be rolled back.
+
+-- ====(Self-Discovery & Applied Exploration)====
+
+-- 1. Research: 
+
+-- What is a subquery in SQL? 
+-- Subquery is query nested inside another query. It is used to return a result.
+
+-- Where can we use subqueries? (e.g., in SELECT, WHERE, FROM) 
+-- SELECT for calculate a value
+-- SELECT (SELECT COUNT(*) FROM Applicants) AS TotalApplicants;
+
+-- WHERE for filter records
+-- WHERE Email IN (SELECT Email FROM Applicants)
+
+-- FROM for treat the subquery as a derived table
+-- FROM (SELECT * FROM Trainees WHERE Program = 'Outsystems') AS OutsystemsTrainees
+
+-- 2. Task: 
+-- Write a query to find all trainees whose emails appear in the applicants table.
+-- You must use a subquery inside a WHERE clause. 
+SELECT * FROM Trainees 
+WHERE Email IN (SELECT Email FROM Applicants);
+
+
+-- 3. Extra Challenge: 
+-- Write a DML statement (like UPDATE or DELETE) that uses a subquery in the WHERE clause. 
+-- Example: Delete all applicants whose email matches someone in the trainees table.
+
+-- By use Delete
+
+DELETE FROM Applicants
+WHERE Email IN (SELECT Email FROM Trainees);
+
+-- preview the change:
+SELECT * FROM Applicants;
+
+-- By use Update
+
+UPDATE Applicants
+SET Source = 'Internal'
+WHERE Email IN (SELECT Email FROM Trainees);
+
+-- Preview the update:
+SELECT * FROM Applicants;
